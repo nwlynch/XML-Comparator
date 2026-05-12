@@ -1,0 +1,26 @@
+# Dependencies
+# Python cache files
+*.pyc
+__pycache__/
+*.pyo
+
+# Virtual environments
+venv/
+env/
+
+# Build and distribution artifacts
+build/
+dist/
+*.egg-info/
+
+# IDE and OS specific files
+.idea/
+.vscode/
+.DS_Store
+.git/
+.mypy_cache/
+.ruff_cache/
+
+# Test artifacts and temporary directories
+tests/fixtures/
+__pycache__/

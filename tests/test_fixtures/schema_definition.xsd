@@ -1,0 +1,7 @@
+<schema>
+  <element name="book">
+    <element name="title" type="string"/>
+    <element name="author" type="string"/>
+    <element name="year" type="integer"/>
+  </element>
+</schema>

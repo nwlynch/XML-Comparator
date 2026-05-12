@@ -48,10 +48,10 @@ The entire process must output a standardized Python data structure (which maps 
 }
 ```
 
-## 📚 Requirements Summary (Checklist)
-*   [x] **Idempotency:** The tool must always yield the same result for the same input.
-*   [x] **Schema Handling:** XSD must be provided at runtime.
-*   [x] **Failure Control:** Must support a configurable failure percentage threshold.
-*   [x] **Module Boundaries:** Core logic must be in `xml_compare_core` for maximum reusability across web/CLI backends.
+## ⚙️ Implementation Plan & Next Steps
+
+1.  **Implement Schema Validation:** Finalize the logic in `src/xml_schema_validator/validator.py` to handle advanced error reporting (node path, specific data type failures). (Status: In Progress)
+2.  **Implement Comparison Core:** Build the `src/xml_compare_core/core.py` module to contain the high-level `compare_directories` function, which acts as the entry point and uses the `FileAnalyzer` logic. (Status: To Do)
+3.  **Test Fixture Integration:** Write a comprehensive test case in `tests/test_comparison.py` to verify all three paths (Schema, Diff Success, Diff Fail). (Status: To Do)
 
 This blueprint provides a robust, modular starting point suitable for building a reliable and scalable production system.
