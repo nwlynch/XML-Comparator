@@ -7,7 +7,6 @@ A robust, modular Python application for comparing XML files across multiple val
 *   **Directory Comparison (Diffing):** Compares files between a baseline (`input`) and a target (`output`) directory pair.
 *   **Intelligent Engine:** Automatically selects the best comparison engine (in-memory vs. streaming) based on file size and complexity to ensure performance and prevent memory exhaustion.
 *   **Standardized Output:** All comparisons return a single, consistent JSON/Python data structure (`GlobalReport`) suitable for immediate consumption by Web UIs or API endpoints.
-
 ## 📐 Architecture
 The tool is built on a highly modular Python library (`xml_compare_core`) to ensure maximum reusability and maintainability, decoupling the core comparison logic from the user interface (CLI, API, Web).
 
@@ -25,8 +24,7 @@ You must have Python 3.8+ installed. The following dependencies are required:
 
 Install dependencies using:
 ```bash
-pip install -r requirements.txt 
-# (Note: A requirements.txt should be created to list dependencies)
+pip install -r requirements.txt
 ```
 
 ### Usage
@@ -57,3 +55,4 @@ pytest tests/test_comparison.py
 
 ## 🏗️ Development & Contribution
 This project is managed by the QMS team. All contributions must follow the architectural standards defined in `BLUEPRINT.md`. Please ensure all new features are first scoped via the `brainstorming` skill.
+

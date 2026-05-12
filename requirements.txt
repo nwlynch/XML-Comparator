@@ -1,0 +1,3 @@
+lxml
+pytest
+# If the API is used, the core framework dependencies (e.g., Flask/FastAPI) would be listed here.
