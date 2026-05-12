@@ -1,0 +1,1 @@
+# This file makes the xml_compare_core directory a Python package.

@@ -1,0 +1,1 @@
+# This file makes the xml_diff_manager directory a Python package.
