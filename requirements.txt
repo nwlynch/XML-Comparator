@@ -1,3 +1,3 @@
-lxml
-pytest
-setuptools # Added to resolve the ModuleNotFoundError
+lxml>=4.9.0
+pytest>=7.0.0
+setuptools>=60.0.0

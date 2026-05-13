@@ -1,7 +1,15 @@
 import os
-from typing import List, Tuple, Dict
-from src.xml_compare_core.models import GlobalReport, ComparisonResult, ComparisonType
-from .validator import XMLSchemaValidator # Relative import assumption
+from typing import List, Dict, Any
+
+from xml_compare_core.models import (
+    GlobalReport,
+    ComparisonResult,
+    ComparisonType,
+    ComparisonStatus,
+)
+
+__all__ = ["DirectoryManager", "FileAnalyzer"]
+
 
 class FileAnalyzer:
     """

@@ -1,8 +1,15 @@
-from typing import Dict, Any
-from src.xml_compare_core.models import ComparisonType, ComparisonEngineConfig, GlobalReport
-from src.xml_schema_validator.validator import XMLSchemaValidator
-from src.xml_diff_manager.manager import DirectoryManager
-from .models import ComparisonEngineConfig, ComparisonType, GlobalReport
+from typing import Any
+import os
+
+from .models import (
+    ComparisonType, 
+    ComparisonEngineConfig, 
+    GlobalReport, 
+    ComparisonResult, 
+    ComparisonStatus
+)
+from xml_schema_validator.validator import XMLSchemaValidator
+from xml_diff_manager.manager import DirectoryManager
 
 def run_xml_comparison(
     comparison_type: ComparisonType, 

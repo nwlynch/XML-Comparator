@@ -32,6 +32,14 @@ class GlobalReport:
     })
     results: List[ComparisonResult] = field(default_factory=list)
 
+__all__ = [
+    "ComparisonStatus",
+    "ComparisonType",
+    "ComparisonResult",
+    "GlobalReport",
+    "ComparisonEngineConfig",
+]
+
 @dataclass
 class ComparisonEngineConfig:
     """Configuration parameters used by the comparison engine."""

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+    <item>
+        <id>1</id>
+        <name>Product A</name>
+        <value>100.00</value>
+    </item>
+    <item>
+        <id>2</id>
+        <name>Product B</name>
+        <value>150.50</value>
+    </item>
+    <item>
+        <id>3</id>
+        <name>Product C</name>
+        <value>200.00</value>
+    </item>
+</items>

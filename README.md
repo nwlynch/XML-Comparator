@@ -1,58 +1,136 @@
 # XML Comparator
 
-A robust, modular Python application for comparing XML files across multiple validation types: Schema Validation and Content Difference Detection.
+A Python library for comparing XML files using schema validation or directory diff operations.
 
-## ✨ Features
-*   **Schema Validation:** Compares an XML document against a predefined XSD schema, providing detailed feedback on structural or type mismatches.
-*   **Directory Comparison (Diffing):** Compares files between a baseline (`input`) and a target (`output`) directory pair.
-*   **Intelligent Engine:** Automatically selects the best comparison engine (in-memory vs. streaming) based on file size and complexity to ensure performance and prevent memory exhaustion.
-*   **Standardized Output:** All comparisons return a single, consistent JSON/Python data structure (`GlobalReport`) suitable for immediate consumption by Web UIs or API endpoints.
-## 📐 Architecture
-The tool is built on a highly modular Python library (`xml_compare_core`) to ensure maximum reusability and maintainability, decoupling the core comparison logic from the user interface (CLI, API, Web).
+## Features
 
-**Core Modules:**
-1.  **`xml_schema_validator`**: Handles the parsing and validation logic against XSDs.
-2.  **`xml_diff_manager`**: Contains the orchestration logic for directory comparison and the file size/complexity analysis.
-3.  **`xml_compare_core`**: The main dispatcher that routes the request to the correct, specialized module.
+- **Schema Validation**: Validate XML files against XSD schemas with detailed error reporting
+- **Directory Diff**: Compare XML files across two directories (baseline vs output)
+- **Modular Architecture**: Clean separation of concerns with reusable components
+- **Production-Ready**: Modern Python 3.12+ patterns, comprehensive error handling
+- **CLI Tool**: Ready-to-use command-line interface for common use cases
 
-## 🚀 Getting Started
+## Installation
 
-### Prerequisites
-You must have Python 3.8+ installed. The following dependencies are required:
-*   `lxml`: For robust XML parsing and XSD validation.
-*   `pytest`: For running the included test suite.
-
-Install dependencies using:
 ```bash
-pip install -r requirements.txt
+# Clone and install
+cd /path/to/xml-comparator
+pip install -e .
 ```
 
-### Usage
-The application is intended to be run via a wrapper script or directly imported into a larger service.
+## Quick Start
 
-**1. Schema Validation Example:**
-To validate a file `my_schema.xsd` against a target file `test_file.xml`:
+### Schema Validation Mode
+
+Validate a single XML file against an XSD schema:
+
 ```bash
-python -m xml_compare_core.core run_comparison --type schema \
-    --xsd_path /path/to/my_schema.xsd \
-    --xml_path /path/to/test_file.xml
+python compare_xml_cli.py schema \
+    --xsd schema.xsd \
+    --xml-path input.xml
 ```
 
-**2. Directory Diff Example:**
-To compare files in the `output` directory against the baseline in the `input` directory:
+### Directory Diff Mode
+
+Compare XML files between two directories:
+
 ```bash
-python -m xml_compare_core.core run_comparison --type diff \
-    --output_dir ./test_fixtures/test_out \
-    --input_dir ./test_fixtures/test_in \
-    --failure_threshold 0.2 
+python compare_xml_cli.py diff \
+    --input-dir ./baseline \
+    --output-dir ./generated
 ```
 
-## 🧪 Running Tests
-To run the integrated test suite, ensure you are in the project root and execute:
+## Usage Examples
+
+### Validate XML against schema
+
 ```bash
-pytest tests/test_comparison.py
+python compare_xml_cli.py schema --xsd items.xsd --xml-path document.xml
 ```
 
-## 🏗️ Development & Contribution
-This project is managed by the QMS team. All contributions must follow the architectural standards defined in `BLUEPRINT.md`. Please ensure all new features are first scoped via the `brainstorming` skill.
+### Compare entire directories
+
+```bash
+python compare_xml_cli.py diff --input-dir ./input --output-dir ./output --failure-threshold 0.1
+```
+
+### Using the API directly
+
+```python
+from xml_compare_core import run_xml_comparison, ComparisonType, ComparisonEngineConfig
+
+# Schema validation
+config = ComparisonEngineConfig(schema_path="schema.xsd")
+report = run_xml_comparison(
+    comparison_type=ComparisonType.SCHEMA,
+    config=config,
+    xml_path="document.xml"
+)
+
+# Directory diff
+config = ComparisonEngineConfig()
+report = run_xml_comparison(
+    comparison_type=ComparisonType.DIFF,
+    config=config,
+    input_dir="./baseline",
+    output_dir="./output"
+)
+```
+
+## Project Structure
+
+```
+xml-comparator/
+├── compare_xml_cli.py      # CLI entry point
+├── items.xsd               # Sample XSD schema
+├── input/                  # Input XML files (for testing)
+│   ├── valid.xml
+│   └── invalid_element.xml
+├── output/                 # Output XML files (for testing)
+├── src/
+│   ├── xml_compare_core/
+│   │   ├── __init__.py
+│   │   ├── core.py
+│   │   └── models.py
+│   ├── xml_diff_manager/
+│   │   ├── __init__.py
+│   │   ├── manager.py
+│   │   └── validator.py
+│   └── xml_schema_validator/
+│       ├── __init__.py
+│       └── validator.py
+├── tests/                  # Test fixtures
+├── setup.py
+├── requirements.txt
+└── README.md
+```
+
+## Supported Operations
+
+| Operation | Description | Command |
+|-----------|-------------|---------|
+| Schema Validation | Verify XML conforms to XSD schema | `compare_xml_cli.py schema --xsd schema.xsd --xml-path file.xml` |
+| Directory Diff | Compare two directories of XML files | `compare_xml_cli.py diff --input-dir ./input --output-dir ./output` |
+| Custom Threshold | Set maximum allowed failure rate | Add `--failure-threshold 0.1` |
+
+## Error Handling
+
+The tool provides detailed error messages including:
+- Schema validation errors with line numbers
+- Missing files and directories
+- Custom failure rate thresholds
+
+## Dependencies
+
+- `lxml>=4.9.0` - XML parsing and schema validation
+- `pytest>=7.0.0` - Testing framework
+- `setuptools>=60.0.0` - Package management
+
+## License
+
+MIT License - See LICENSE file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 

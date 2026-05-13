@@ -6,6 +6,7 @@ __all__ = ["XMLSchemaValidator"]
 class XMLSchemaValidator:
     """
     Handles validation of XML files against a provided XSD schema.
+    This is the base validator class used across multiple modules.
     """
     def __init__(self, xsd_path: str):
         """
@@ -30,14 +31,10 @@ class XMLSchemaValidator:
             else:
                 # Returns the most relevant error message from the schema validation
                 error_list = self.schema.error_log
-                # Handle lxml 5.x+ which uses last_error, and older versions with error
+                # Get error message from lxml 5.x+ error_log or older error_log.error
                 error = error_list.last_error if hasattr(error_list, 'last_error') else getattr(error_list, 'error', None)
                 return (False, str(error) if error else "Schema validation failed")
         except etree.XMLSyntaxError as e:
             return (False, f"XML Syntax Error: {e}")
         except FileNotFoundError:
             return (False, "XML file not found.")
-
-# Placeholder for future functionality:
-# class XMLContentComparer:
-#     ...
